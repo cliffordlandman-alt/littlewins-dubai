@@ -1,5 +1,5 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>LittleWins Dubai — Fun kids' activities & coaches in Dubai</title>
 <meta name="description" content="Find playful activities and friendly coaches for little ones around Dubai, including sports sessions at home. Little adventures. Big memories.">
 <meta name="theme-color" content="#FFD23F">
@@ -9,41 +9,58 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚽</text></svg>">
 <link rel="stylesheet" href="style.css"></head><body>
 <a class="skip" href="#browse">Skip to activities</a>
-<header class="top"><div class="wrap bar"><a href="#" class="logo">LittleWins <span>Dubai</span></a>
-<nav aria-label="Main"><a href="#browse">Explore</a><a href="#how">How it works</a><a href="#join" class="pill">For coaches</a></nav></div></header>
+<header class="top"><div class="wrap bar"><a href="#" class="logo"><span class="lg-dot" aria-hidden="true">★</span>LittleWins <span>Dubai</span></a>
+<nav aria-label="Main"><a href="#quiz">Quiz</a><a href="#browse">Explore</a><a href="#how">How it works</a><a href="#join" class="pill">For coaches</a></nav></div></header>
 <main>
-<section class="hero"><div class="wrap hero-in"><div>
+<section class="hero" id="top">
+<div class="sky" aria-hidden="true"><span class="sun"></span><span class="cloud c1"></span><span class="cloud c2"></span>
+<span class="fl f1" data-depth="0.3">⚽</span><span class="fl f2" data-depth="0.6">🎨</span><span class="fl f3" data-depth="0.4">🎵</span><span class="fl f4" data-depth="0.7">🏊</span><span class="fl f5" data-depth="0.5">🤸</span><span class="fl f6" data-depth="0.35">🔬</span>
+<span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span></div>
+<div class="wrap hero-in">
 <p class="kicker">Little adventures. Big memories.</p>
-<h1>Big smiles start with little adventures.</h1>
+<h1 class="pop-words" aria-label="Big smiles start with little adventures."><span>Big</span> <span>smiles</span> <span>start</span> <span>with</span> <span class="hl">little</span> <span class="hl">adventures.</span></h1>
 <p class="lead">Find playful activities and friendly coaches for little ones around Dubai — including fun sports sessions at home.</p>
-<div class="cta"><a class="btn" href="#browse">Explore activities ↓</a><a class="btn ghost" href="#join">I run activities</a></div></div>
-<div class="hero-art" role="img" aria-label="Soccer ball, paint palette and a child doing a cartwheel">⚽ 🎨 🤸</div></div></section>
+<div class="cta"><a class="btn big" href="#quiz">✨ Find an activity in 3 taps</a><a class="btn ghost" href="#browse">Browse all</a></div>
+</div>
+<svg class="wave" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0 40 C 240 90 480 0 720 40 S 1200 80 1440 30 V80 H0Z" fill="#FFFDF5"/></svg>
+</section>
 
-<section id="browse" class="wrap"><h2>Find your little one's next win</h2>
-<p class="muted">Browse the pilot listings and message providers directly about availability and details.</p>
+<section id="quiz" class="wrap reveal"><div class="quiz">
+<div class="qhead"><h2>Find the perfect activity in 3 taps</h2><div class="dots" aria-hidden="true"><i></i><i></i><i></i></div></div>
+<div class="qstep" data-step="0"><p class="qq">How old is your little one?</p><div class="opts">
+<button type="button" data-v="0-2"><b>👶</b>0–2</button><button type="button" data-v="2-5"><b>🧒</b>2–5</button><button type="button" data-v="6-9"><b>🧑</b>6–9</button><button type="button" data-v="10-13"><b>🧑‍🎤</b>10–13</button></div></div>
+<div class="qstep" data-step="1" hidden><p class="qq">What do they love?</p><div class="opts" id="qcats"></div></div>
+<div class="qstep" data-step="2" hidden><p class="qq">At home or out and about?</p><div class="opts">
+<button type="button" data-v="At home"><b>🏡</b>At home</button><button type="button" data-v="Venue"><b>📍</b>Out at a venue</button><button type="button" data-v=""><b>🤷</b>Either</button></div></div>
+<div class="qstep" data-step="3" hidden><p class="qq" id="qres" aria-live="polite"></p><div class="cta"><a class="btn" href="#browse">See matches ↓</a><button type="button" class="btn ghost" id="qagain">Start again</button></div></div>
+</div></section>
+
+<section id="browse" class="wrap reveal"><div class="bhead"><div><h2>Find your little one's next win</h2>
+<p class="muted">Browse the pilot listings and message providers directly about availability and details.</p></div>
+<button type="button" id="surprise" class="btn surprise">🎲 Surprise me!</button></div>
+<div class="cats" id="cats" role="group" aria-label="Category"></div>
 <div class="filters">
-<label class="full"><span class="sr">Search</span><input id="q" type="search" placeholder="Search activities or coaches…"></label>
+<label class="full"><span class="sr">Search</span><input id="q" type="search" placeholder="🔍 Search activities or coaches…"></label>
 <label><span class="sr">Age</span><select id="age"><option value="">All ages</option><option value="0-2">0–2 yrs</option><option value="2-5">2–5 yrs</option><option value="6-9">6–9 yrs</option><option value="10-13">10–13 yrs</option></select></label>
-<label><span class="sr">Category</span><select id="cat"><option value="">All categories</option></select></label>
 <label><span class="sr">Area</span><select id="area"><option value="">All areas</option></select></label>
-<div class="seg" role="group" aria-label="Where"><button data-s="" aria-pressed="true">Any</button><button data-s="At home" aria-pressed="false">At home</button><button data-s="Venue" aria-pressed="false">Venue</button></div>
-<button type="button" id="reset" class="btn ghost reset">Reset filters</button>
+<div class="seg" role="group" aria-label="Where"><button type="button" data-s="" aria-pressed="true">Any</button><button type="button" data-s="At home" aria-pressed="false">🏡 At home</button><button type="button" data-s="Venue" aria-pressed="false">📍 Venue</button></div>
+<button type="button" id="reset" class="btn ghost reset">↺ Reset</button>
 </div>
 <p id="count" class="muted" aria-live="polite"></p>
 <div id="list" class="grid"></div></section>
 
-<section id="how" class="band"><div class="wrap"><h2>How it works</h2><ol class="steps">
-<li><b>🔍 Browse</b><span>Filter by age, activity, area and whether it's at home or at a venue.</span></li>
-<li><b>💬 Message</b><span>Tap WhatsApp to chat to the coach directly about times and details.</span></li>
-<li><b>🎉 Play</b><span>Book with the provider and enjoy a little win together.</span></li></ol>
-<h2>FAQ</h2>
+<section id="how" class="band"><div class="wrap"><h2 class="reveal">How it works</h2><ol class="steps">
+<li class="reveal"><b><em>🔍</em> Browse</b><span>Filter by age, activity, area and whether it's at home or at a venue.</span></li>
+<li class="reveal"><b><em>💬</em> Message</b><span>Tap WhatsApp to chat to the coach directly about times and details.</span></li>
+<li class="reveal"><b><em>🎉</em> Play</b><span>Book with the provider and enjoy a little win together.</span></li></ol>
+<h2 class="reveal">FAQ</h2><div class="faq reveal">
 <details><summary>Are providers verified?</summary><p>We're a small pilot. Always ask providers about their experience, any required permits and safeguarding before booking.</p></details>
 <details><summary>How do I book?</summary><p>Message the provider on WhatsApp. Bookings and arrangements are made directly with them.</p></details>
 <details><summary>What are "Sample" listings?</summary><p>They show how listings will look. They aren't real providers and can't be booked.</p></details>
-<details><summary>I run kids' activities — can I join?</summary><p>Yes! Fill in the short form below and we'll be in touch.</p></details>
+<details><summary>I run kids' activities — can I join?</summary><p>Yes! Fill in the short form below and we'll be in touch.</p></details></div>
 </div></section>
 
-<section id="join" class="wrap"><div class="join"><h2>Do you run activities for children?</h2>
+<section id="join" class="wrap reveal"><div class="join"><h2>Do you run activities for children? 🚀</h2>
 <p>LittleWins is starting with a small Dubai pilot. Coaches and activity providers are invited to register their interest.</p>
 <form id="form" novalidate>
 <label>Your name <span class="req" aria-hidden="true">*</span><input name="name" required aria-required="true" autocomplete="name"></label>
@@ -52,13 +69,15 @@
 <label>Ages you work with<input name="ages" placeholder="e.g. 2–5"></label>
 <label>Area of Dubai<input name="area" placeholder="e.g. Al Barsha, or at home"></label>
 <label>Your WhatsApp or phone <span class="req" aria-hidden="true">*</span><input name="phone" required aria-required="true" type="tel" autocomplete="tel"></label>
-<label>Tell us a little more (optional)<textarea name="notes" rows="3"></textarea></label>
-<p class="muted small"><span class="req">*</span> Required. Listings and any required permits or credentials will be checked before public launch.</p>
-<div class="cta"><button class="btn" type="submit" data-via="wa">Send via WhatsApp</button><button class="btn ghost" type="submit" data-via="mail">Send by email</button></div>
-<p id="err" class="err" role="alert"></p></form>
-<div id="thanks" class="thanks" hidden tabindex="-1"><h3>Thank you! 🎉</h3><p>Your details are ready to send — just press send in the app that opened. We'll be in touch soon.</p></div>
+<label class="full">Tell us a little more (optional)<textarea name="notes" rows="3"></textarea></label>
+<p class="muted small full"><span class="req">*</span> Required. Listings and any required permits or credentials will be checked before public launch.</p>
+<div class="cta full"><button class="btn" type="submit" data-via="wa">Send via WhatsApp</button><button class="btn ghost" type="submit" data-via="mail">Send by email</button></div>
+<p id="err" class="err full" role="alert"></p></form>
+<div id="thanks" class="thanks" hidden tabindex="-1"><div class="big-emoji" aria-hidden="true">🎉</div><h3>Thank you!</h3><p>Your details are ready to send — just press send in the app that opened. We'll be in touch soon.</p></div>
 </div></section>
 </main>
 <dialog id="dlg" aria-labelledby="dlg-t"><div id="dlg-body"></div><button class="close" aria-label="Close">✕</button></dialog>
 <footer class="wrap foot">© LittleWins Dubai · Little adventures. Big memories.</footer>
+<nav class="dock" aria-label="Quick actions"><a href="#browse"><b>🔍</b>Explore</a><a href="#quiz"><b>✨</b>Quiz</a><button type="button" id="dock-surprise"><b>🎲</b>Surprise</button><a href="#join"><b>🙋</b>Join</a></nav>
+<canvas id="confetti" aria-hidden="true"></canvas>
 <script src="data.js"></script><script src="app.js"></script></body></html>
