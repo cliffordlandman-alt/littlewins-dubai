@@ -1,0 +1,63 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LittleWins Dubai — Fun kids' activities & coaches in Dubai</title>
+<meta name="description" content="Find playful activities and friendly coaches for little ones around Dubai, including sports sessions at home. Little adventures. Big memories.">
+<meta name="theme-color" content="#FFD23F">
+<meta property="og:type" content="website"><meta property="og:title" content="LittleWins Dubai">
+<meta property="og:description" content="Little adventures. Big memories. Find fun kids' activities and coaches around Dubai.">
+<meta property="og:image" content="og.png"><meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚽</text></svg>">
+<link rel="stylesheet" href="style.css"></head><body>
+<a class="skip" href="#browse">Skip to activities</a>
+<header class="top"><div class="wrap bar"><a href="#" class="logo">LittleWins <span>Dubai</span></a>
+<nav aria-label="Main"><a href="#browse">Explore</a><a href="#how">How it works</a><a href="#join" class="pill">For coaches</a></nav></div></header>
+<main>
+<section class="hero"><div class="wrap hero-in"><div>
+<p class="kicker">Little adventures. Big memories.</p>
+<h1>Big smiles start with little adventures.</h1>
+<p class="lead">Find playful activities and friendly coaches for little ones around Dubai — including fun sports sessions at home.</p>
+<div class="cta"><a class="btn" href="#browse">Explore activities ↓</a><a class="btn ghost" href="#join">I run activities</a></div></div>
+<div class="hero-art" role="img" aria-label="Soccer ball, paint palette and a child doing a cartwheel">⚽ 🎨 🤸</div></div></section>
+
+<section id="browse" class="wrap"><h2>Find your little one's next win</h2>
+<p class="muted">Browse the pilot listings and message providers directly about availability and details.</p>
+<div class="filters">
+<label class="full"><span class="sr">Search</span><input id="q" type="search" placeholder="Search activities or coaches…"></label>
+<label><span class="sr">Age</span><select id="age"><option value="">All ages</option><option value="0-2">0–2 yrs</option><option value="2-5">2–5 yrs</option><option value="6-9">6–9 yrs</option><option value="10-13">10–13 yrs</option></select></label>
+<label><span class="sr">Category</span><select id="cat"><option value="">All categories</option></select></label>
+<label><span class="sr">Area</span><select id="area"><option value="">All areas</option></select></label>
+<div class="seg" role="group" aria-label="Where"><button data-s="" aria-pressed="true">Any</button><button data-s="At home" aria-pressed="false">At home</button><button data-s="Venue" aria-pressed="false">Venue</button></div>
+</div>
+<p id="count" class="muted" aria-live="polite"></p>
+<div id="list" class="grid"></div></section>
+
+<section id="how" class="band"><div class="wrap"><h2>How it works</h2><ol class="steps">
+<li><b>🔍 Browse</b><span>Filter by age, activity, area and whether it's at home or at a venue.</span></li>
+<li><b>💬 Message</b><span>Tap WhatsApp to chat to the coach directly about times and details.</span></li>
+<li><b>🎉 Play</b><span>Book with the provider and enjoy a little win together.</span></li></ol>
+<h2>FAQ</h2>
+<details><summary>Are providers verified?</summary><p>We're a small pilot. Always ask providers about their experience, any required permits and safeguarding before booking.</p></details>
+<details><summary>How do I book?</summary><p>Message the provider on WhatsApp. Bookings and arrangements are made directly with them.</p></details>
+<details><summary>What are "Sample" listings?</summary><p>They show how listings will look. They aren't real providers and can't be booked.</p></details>
+<details><summary>I run kids' activities — can I join?</summary><p>Yes! Fill in the short form below and we'll be in touch.</p></details>
+</div></section>
+
+<section id="join" class="wrap"><div class="join"><h2>Do you run activities for children?</h2>
+<p>LittleWins is starting with a small Dubai pilot. Coaches and activity providers are invited to register their interest.</p>
+<form id="form" novalidate>
+<label>Your name<input name="name" required autocomplete="name"></label>
+<label>Business or coach name (optional)<input name="business"></label>
+<label>Activity<input name="activity" required placeholder="e.g. gymnastics, music, art"></label>
+<label>Ages you work with<input name="ages" placeholder="e.g. 2–5"></label>
+<label>Area of Dubai<input name="area" placeholder="e.g. Al Barsha, or at home"></label>
+<label>Your WhatsApp or phone<input name="phone" required type="tel" autocomplete="tel"></label>
+<label>Tell us a little more (optional)<textarea name="notes" rows="3"></textarea></label>
+<p class="muted small">Listings and any required permits or credentials will be checked before public launch.</p>
+<div class="cta"><button class="btn" type="submit" data-via="wa">Send via WhatsApp</button><button class="btn ghost" type="submit" data-via="mail">Send by email</button></div>
+<p id="err" class="err" role="alert"></p></form>
+<div id="thanks" class="thanks" hidden tabindex="-1"><h3>Thank you! 🎉</h3><p>Your details are ready to send — just press send in the app that opened. We'll be in touch soon.</p></div>
+</div></section>
+</main>
+<dialog id="dlg" aria-labelledby="dlg-t"><div id="dlg-body"></div><button class="close" aria-label="Close">✕</button></dialog>
+<footer class="wrap foot">© LittleWins Dubai · Little adventures. Big memories.</footer>
+<script src="data.js"></script><script src="app.js"></script></body></html>
