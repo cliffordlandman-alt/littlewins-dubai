@@ -6,6 +6,12 @@ window.LW_CONFIG = {
   adminEmail: "hello@example.com"       // PLACEHOLDER: email fallback for sign-ups
 };
 
+// Floating stickers shown when a parent taps a category (edit text here)
+window.LW_STICKERS = {
+  "Swimming": ["🏊 Coach Lindy", "★★★★★ 23 reviews"],
+  "Sports":   ["⚽ Coach Tammy", "★★★★★ 23 reviews"]
+};
+
 // Listings. Set sample:true for example listings (shows a "Sample" badge).
 // whatsapp: placeholder number; ages: any of "0-2","2-5","6-9","10-13"
 // category: "Sports","Swimming","Movement","Arts","Music","STEM"
@@ -16,7 +22,7 @@ window.LW_LISTINGS = [
     summary:"Fun, engaging soccer sessions for young children with a female coach who loves helping little ones learn through play.",
     details:"Sessions come to your home or garden. Please message Tamaryn to confirm availability, location and session details." },
   { id:"lindy", name:"Lindy", title:"Swimming", category:"Swimming", emoji:"🏊",
-    ages:["2-5","6-9"], area:"To be confirmed", setting:"At home", whatsapp:"971500000002", sample:false, tag:"New provider · details to confirm",
+    ages:["2-5","6-9"], area:"Across Dubai", setting:"At home", whatsapp:"971500000002", sample:false, tag:"New provider · details to confirm",
     summary:"Swimming coach listing. Contact Lindy directly to confirm ages taught, lesson format, location and availability.",
     details:"Provider details and credentials have not yet been independently verified. Please ask Lindy directly." },
   { id:"tiny-tumblers", name:"Tiny Tumblers", title:"Movement and balance", category:"Movement", emoji:"🤸",

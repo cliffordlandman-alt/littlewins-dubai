@@ -34,7 +34,7 @@ $$(".seg button").forEach(o=>o.setAttribute("aria-pressed",o.dataset.s===st.s));
 $("#q").addEventListener("input",e=>{st.q=e.target.value;render()});
 ["age","area"].forEach(k=>$("#"+k).addEventListener("change",e=>{st[k]=e.target.value;render()}));
 $$(".seg button").forEach(b=>b.onclick=()=>{st.s=b.dataset.s;sync();render()});
-$("#cats").addEventListener("click",e=>{const b=e.target.closest(".chip");if(!b)return;st.cat=b.dataset.c;sync();b.classList.remove("bump");void b.offsetWidth;b.classList.add("bump");render()});
+$("#cats").addEventListener("click",e=>{const b=e.target.closest(".chip");if(!b)return;st.cat=b.dataset.c;sync();b.classList.remove("bump");void b.offsetWidth;b.classList.add("bump");render();stickers(st.cat)});
 function reset(){Object.keys(st).forEach(k=>st[k]="");sync();render()}
 $("#reset").onclick=reset;
 // Details dialog
@@ -60,7 +60,7 @@ const qa={};const steps=$$(".qstep"),dots=$$(".dots i");
 function show(i){steps.forEach((s,j)=>s.hidden=j!==i);dots.forEach((d,j)=>d.classList.toggle("on",j<=Math.min(i,2)))}
 steps.slice(0,3).forEach((s,i)=>s.addEventListener("click",e=>{const b=e.target.closest("button[data-v]");if(!b)return;qa[i]=b.dataset.v;
 if(i<2)return show(i+1);
-Object.keys(st).forEach(k=>st[k]="");st.age=qa[0];st.cat=qa[1];st.s=qa[2];sync();let r=render();
+Object.keys(st).forEach(k=>st[k]="");st.age=qa[0];st.cat=qa[1];st.s=qa[2];sync();let r=render();stickers(qa[1]);
 let note="";if(!r.length){st.cat="";sync();r=render();note=r.length?" (we widened it to all activities)":"";if(!r.length){st.s="";sync();r=render();note=" (we widened your search)"}}
 $("#qres").textContent=r.length?`🎉 We found ${r.length} ${r.length===1?"match":"matches"}${note}!`:`No matches yet — try another age.`;show(3);
 if(!RM&&r.length)burst(innerWidth/2,innerHeight/2,40);
@@ -74,6 +74,11 @@ if(miss.length){$("#err").textContent="Please add your name, activity and phone.
 $("#err").textContent="";const t=`New LittleWins provider sign-up\nName: ${d.name}\nBusiness: ${d.business||"-"}\nActivity: ${d.activity}\nAges: ${d.ages||"-"}\nArea: ${d.area||"-"}\nPhone: ${d.phone}\nNotes: ${d.notes||"-"}`;
 window.open(via==="wa"?wa(C.adminWhatsApp,t):`mailto:${C.adminEmail}?subject=${encodeURIComponent("LittleWins provider sign-up")}&body=${encodeURIComponent(t)}`,"_blank");
 f.hidden=true;$("#thanks").hidden=false;$("#thanks").focus();if(!RM){const r=$("#thanks").getBoundingClientRect();burst(r.left+r.width/2,r.top+40,120)}});
+
+// Floating stickers
+function stickers(c){const s=(window.LW_STICKERS||{})[c];if(!s)return;$$(".sticker").forEach(e=>e.remove());
+s.forEach((t,i)=>{const e=document.createElement("div");e.className="sticker"+(i?" s2":"");e.textContent=t;e.setAttribute("aria-hidden","true");
+e.style[i?"right":"left"]="5%";e.style.animationDelay=(i*0.25)+"s";document.body.appendChild(e);setTimeout(()=>e.remove(),RM?2500:4600)})}
 // Tiny confetti
 const cv=$("#confetti"),cx=cv.getContext("2d");let parts=[],raf=0;
 function burst(x,y,n){cv.width=innerWidth;cv.height=innerHeight;const cols=["#FFD23F","#FF7A45","#FF5D8F","#3DA5FF","#2BB673","#8B5CF6"];
