@@ -6,7 +6,7 @@ const uniq=k=>[...new Set(L.map(x=>x[k]))].sort();
 // Category look: colour, darker text colour, icon. Unknown categories get a fallback.
 const CAT={Sports:["#2BB673","#167a4b","⚽"],Swimming:["#3DA5FF","#1665b0","🏊"],Movement:["#FF5D8F","#b3214f","🤸"],Arts:["#FF7A45","#b4471a","🎨"],Music:["#8B5CF6","#5b2fc2","🎵"],STEM:["#14B8A6","#0b766b","🔬"]};
 const look=c=>CAT[c]||["#FFB020","#8a5a00","⭐"];
-uniq("area").forEach(c=>$("#area").add(new Option(c,c)));
+const ANY_AREA=["Across Dubai","To be confirmed"];uniq("area").filter(c=>!ANY_AREA.includes(c)).forEach(c=>$("#area").add(new Option(c,c)));
 const cats=uniq("category");
 $("#cats").innerHTML=`<button type="button" class="chip" data-c="" aria-pressed="true" style="--c:#1F2A44">🌈 All</button>`+cats.map(c=>`<button type="button" class="chip" data-c="${esc(c)}" aria-pressed="false" style="--c:${look(c)[0]}">${look(c)[2]} ${esc(c)}</button>`).join("");
 $("#qcats").innerHTML=cats.map(c=>`<button type="button" data-v="${esc(c)}"><b>${look(c)[2]}</b>${esc(c)}</button>`).join("")+`<button type="button" data-v=""><b>🌈</b>Everything!</button>`;
@@ -25,7 +25,7 @@ function card(x,i){return `<article class="card${x.sample?" sample":""}" data-ca
 <div class="cbody"><h3>${esc(x.name)}</h3><p class="sub">${esc(x.title)}</p><p>${esc(x.summary)}</p>${chips(x)}
 <div class="acts"><button type="button" class="btn ghost" data-id="${x.id}">Details</button>${x.sample?"":`<a class="btn wa" href="${wa(x.whatsapp,msg(x))}" target="_blank" rel="noopener">💬 WhatsApp ${esc(x.name.split(" ")[0])}</a>`}</div></div></article>`}
 const match=()=>{const q=st.q.toLowerCase();return L.filter(x=>(!q||[x.name,x.title,x.category,x.summary,x.area].join(" ").toLowerCase().includes(q))
-&&(!st.age||x.ages.includes(st.age))&&(!st.cat||x.category===st.cat)&&(!st.area||x.area===st.area)&&(!st.s||x.setting===st.s))};
+&&(!st.age||x.ages.includes(st.age))&&(!st.cat||x.category===st.cat)&&(!st.area||x.area===st.area||ANY_AREA.includes(x.area))&&(!st.s||x.setting===st.s))};
 function render(){const r=match();
 $("#list").innerHTML=r.length?r.map(card).join(""):`<div class="empty"><span class="big-emoji" aria-hidden="true">🙈</span><h3>Oops, nothing here yet!</h3><p class="muted">No listings match all of those. Try fewer filters, or let us surprise you.</p><button type="button" class="btn clear-f">Clear filters</button></div>`;
 $("#count").textContent=`${r.length} ${r.length===1?"listing":"listings"}`;return r}
