@@ -27,6 +27,7 @@
 <label><span class="sr">Category</span><select id="cat"><option value="">All categories</option></select></label>
 <label><span class="sr">Area</span><select id="area"><option value="">All areas</option></select></label>
 <div class="seg" role="group" aria-label="Where"><button data-s="" aria-pressed="true">Any</button><button data-s="At home" aria-pressed="false">At home</button><button data-s="Venue" aria-pressed="false">Venue</button></div>
+<button type="button" id="reset" class="btn ghost reset">Reset filters</button>
 </div>
 <p id="count" class="muted" aria-live="polite"></p>
 <div id="list" class="grid"></div></section>
@@ -45,14 +46,14 @@
 <section id="join" class="wrap"><div class="join"><h2>Do you run activities for children?</h2>
 <p>LittleWins is starting with a small Dubai pilot. Coaches and activity providers are invited to register their interest.</p>
 <form id="form" novalidate>
-<label>Your name<input name="name" required autocomplete="name"></label>
+<label>Your name <span class="req" aria-hidden="true">*</span><input name="name" required aria-required="true" autocomplete="name"></label>
 <label>Business or coach name (optional)<input name="business"></label>
-<label>Activity<input name="activity" required placeholder="e.g. gymnastics, music, art"></label>
+<label>Activity <span class="req" aria-hidden="true">*</span><input name="activity" required aria-required="true" placeholder="e.g. gymnastics, music, art"></label>
 <label>Ages you work with<input name="ages" placeholder="e.g. 2–5"></label>
 <label>Area of Dubai<input name="area" placeholder="e.g. Al Barsha, or at home"></label>
-<label>Your WhatsApp or phone<input name="phone" required type="tel" autocomplete="tel"></label>
+<label>Your WhatsApp or phone <span class="req" aria-hidden="true">*</span><input name="phone" required aria-required="true" type="tel" autocomplete="tel"></label>
 <label>Tell us a little more (optional)<textarea name="notes" rows="3"></textarea></label>
-<p class="muted small">Listings and any required permits or credentials will be checked before public launch.</p>
+<p class="muted small"><span class="req">*</span> Required. Listings and any required permits or credentials will be checked before public launch.</p>
 <div class="cta"><button class="btn" type="submit" data-via="wa">Send via WhatsApp</button><button class="btn ghost" type="submit" data-via="mail">Send by email</button></div>
 <p id="err" class="err" role="alert"></p></form>
 <div id="thanks" class="thanks" hidden tabindex="-1"><h3>Thank you! 🎉</h3><p>Your details are ready to send — just press send in the app that opened. We'll be in touch soon.</p></div>
