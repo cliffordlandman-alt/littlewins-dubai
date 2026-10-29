@@ -135,13 +135,13 @@ dialog[open]{animation:dlgin .4s cubic-bezier(.3,1.5,.5,1)}dialog::backdrop{back
 
 /* Artwork backgrounds (preview) */
 .hero-bg{position:absolute;inset:0;z-index:0;pointer-events:none}
-.hero-bg .slide{position:absolute;inset:-4%;background-size:cover;background-position:center 60%;opacity:0;transform:scale(1.06);transition:opacity 1.4s ease,transform 6s ease}
+.hero-bg .slide{position:absolute;inset:-4%;background-size:cover;background-position:center 30%;opacity:0;transform:scale(1.06);transition:opacity 1.4s ease,transform 6s ease}
 .hero-bg .slide.on{opacity:1;transform:scale(1)}
 .hero-bg::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(255,253,245,.82) 0%,rgba(255,253,245,.62) 55%,rgba(255,253,245,.35) 100%)}
 .hero .sky .sun,.hero .sky .cloud,.hero .sky .blob{opacity:.35}
 .hero-in h1,.hero-in .lead,.hero-in .kicker{text-shadow:0 1px 0 rgba(255,255,255,.8),0 0 18px rgba(255,255,255,.9)}
 .fl.f7{left:12%;top:62%}.fl.f8{right:10%;top:20%}
-.art.pic{height:200px;background-size:cover;background-position:center 62%;place-items:end end}
+.art.pic{height:200px;background-size:cover;background-position:center 30%;place-items:end end}
 .art.pic::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 55%,color-mix(in srgb,var(--c) 70%,transparent) 100%)}
 .art.pic .em{z-index:1;font-size:40px;margin:0 12px 6px 0}
 .card:hover .art.pic{background-size:110%}
