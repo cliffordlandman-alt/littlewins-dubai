@@ -21,14 +21,18 @@ const art=(x,i)=>{const s=(i*37)%100;if(x.img)return `<div class="art pic" style
 <span class="em" aria-hidden="true">${x.emoji}</span></div>`};
 const badge=x=>`<span class="badge${x.sample?" s":""}${x.soon?" n":""}">${x.sample?"Sample":esc(x.tag)}</span>`;
 const chips=x=>`<div class="chips"><span>${x.ages.length?"Ages "+x.ages.join(", "):"Ages to confirm"}</span>${x.soon?"<span>Coach & location to confirm</span>":`<span>${esc(x.setting)}</span><span>${esc(x.area)}</span>`}</div>`;
-function card(x,i){return `<article class="card${x.sample?" sample":""}" data-card="${x.id}" style="--i:${i};--c2:${look(x.category)[1]}">${badge(x)}${art(x,i)}
-<div class="cbody"><h3>${esc(x.name)}</h3><p class="sub">${esc(x.title)}</p><p>${esc(x.summary)}</p>${chips(x)}
-<div class="acts"><button type="button" class="btn ghost" data-id="${x.id}">Details</button>${x.sample||x.soon?"":`<a class="btn wa" href="${wa(x.whatsapp,msg(x))}" target="_blank" rel="noopener">💬 WhatsApp ${esc(x.name.split(" ")[0])}</a>`}</div></div></article>`}
+const actOf=x=>x.activity||x.title;
+const groups=r=>{const m=new Map();r.forEach(x=>{const k=actOf(x);if(!m.has(k))m.set(k,[]);m.get(k).push(x)});return [...m.entries()]};
+const akey=k=>k.toLowerCase().replace(/[^a-z0-9]+/g,"-");
+function card([k,xs],i){const x=xs.find(y=>y.img)||xs[0];return `<article class="card acard" data-card="${akey(k)}" style="--i:${i};--c2:${look(x.category)[1]}"><button type="button" class="aopen" data-act="${esc(k)}" aria-label="${esc(k)} Coaches: see coach profiles">${art(x,i)}
+<span class="atitle">${esc(k)} Coaches</span></button></article>`}
+function coach(x){return `<li class="coach${x.sample?" sample":""}" style="--c2:${look(x.category)[1]}"><div class="chead">${badge(x)}</div><h4>${esc(x.name)}</h4><p class="sub">${esc(x.title)}</p><p>${esc(x.summary)}</p><p class="muted">${esc(x.details)}</p>${chips(x)}
+<div class="acts">${x.soon?`<p class="muted">Coming soon — coach and details to be confirmed.</p>`:x.sample?`<p class="muted">Sample listing — not bookable.</p>`:`<a class="btn wa" href="${wa(x.whatsapp,msg(x))}" target="_blank" rel="noopener">💬 WhatsApp ${esc(x.name.split(" ")[0])}</a>`}</div></li>`}
 const match=()=>{const q=st.q.toLowerCase();return L.filter(x=>(!q||[x.name,x.title,x.category,x.summary,x.area].join(" ").toLowerCase().includes(q))
 &&(!st.age||!x.ages.length||x.ages.includes(st.age))&&(!st.cat||x.category===st.cat)&&(!st.area||x.area===st.area||ANY_AREA.includes(x.area))&&(!st.s||x.setting===st.s||x.setting==="To be confirmed"))};
 function render(){const r=match();
-$("#list").innerHTML=r.length?r.map(card).join(""):`<div class="empty"><span class="big-emoji" aria-hidden="true">🙈</span><h3>Oops, nothing here yet!</h3><p class="muted">No listings match all of those. Try fewer filters, or let us surprise you.</p><button type="button" class="btn clear-f">Clear filters</button></div>`;
-$("#count").textContent=`${r.length} ${r.length===1?"listing":"listings"}`;return r}
+const g=groups(r);$("#list").innerHTML=g.length?g.map(card).join(""):`<div class="empty"><span class="big-emoji" aria-hidden="true">🙈</span><h3>Oops, nothing here yet!</h3><p class="muted">No listings match all of those. Try fewer filters, or let us surprise you.</p><button type="button" class="btn clear-f">Clear filters</button></div>`;
+$("#count").textContent=`${g.length} ${g.length===1?"activity":"activities"}`;return r}
 function sync(){$("#q").value=st.q;$("#age").value=st.age;$("#area").value=st.area;
 $$(".seg button").forEach(o=>o.setAttribute("aria-pressed",o.dataset.s===st.s));$$(".chip").forEach(o=>o.setAttribute("aria-pressed",o.dataset.c===st.cat))}
 $("#q").addEventListener("input",e=>{st.q=e.target.value;render()});
@@ -39,9 +43,10 @@ function reset(){Object.keys(st).forEach(k=>st[k]="");sync();render()}
 $("#reset").onclick=reset;
 // Details dialog
 const dlg=$("#dlg");
-function openDlg(x){$("#dlg-body").innerHTML=`<div style="position:relative">${badge(x)}${art(x,1)}</div><div class="cbody" style="--c2:${look(x.category)[1]}"><h3 id="dlg-t">${esc(x.name)}</h3><p class="sub">${esc(x.title)}${x.title.toLowerCase()===x.category.toLowerCase()?"":" · "+esc(x.category)}</p><p>${esc(x.summary)}</p><p>${esc(x.details)}</p>${chips(x)}
-<div class="acts">${x.soon?`<p class="muted">Coming soon — coach and details to be confirmed.</p>`:x.sample?`<p class="muted">Sample listing — not bookable.</p>`:`<a class="btn wa" href="${wa(x.whatsapp,msg(x))}" target="_blank" rel="noopener">💬 Message on WhatsApp</a>`}</div></div>`;dlg.showModal()}
-$("#list").addEventListener("click",e=>{if(e.target.closest(".clear-f"))return reset();const b=e.target.closest("[data-id]");if(b)openDlg(L.find(y=>y.id===b.dataset.id))});
+function openDlg(k){const xs=match().filter(y=>actOf(y)===k),all=xs.length?xs:L.filter(y=>actOf(y)===k),x=all.find(y=>y.img)||all[0];
+$("#dlg-body").innerHTML=`<div style="position:relative">${art(x,1)}</div><div class="cbody" style="--c2:${look(x.category)[1]}"><h3 id="dlg-t">${esc(k)} Coaches</h3><p class="sub">${all.length} ${all.length===1?"profile":"profiles"}</p><ul class="coaches">${all.map(coach).join("")}</ul>
+<button type="button" class="btn ghost back">← Back to activities</button></div>`;dlg.showModal();dlg.querySelector(".back").onclick=()=>dlg.close()}
+$("#list").addEventListener("click",e=>{if(e.target.closest(".clear-f"))return reset();const b=e.target.closest("[data-act]");if(b)openDlg(b.dataset.act)});
 dlg.querySelector(".close").onclick=()=>dlg.close();dlg.addEventListener("click",e=>{if(e.target===dlg)dlg.close()});
 // Surprise me
 let rolling=false;
@@ -49,8 +54,8 @@ function surprise(){if(rolling)return;let r=match();if(!r.length){reset();r=L}
 const btn=$("#surprise");btn.classList.remove("shake");void btn.offsetWidth;btn.classList.add("shake");
 $("#browse").scrollIntoView({behavior:RM?"auto":"smooth",block:"start"});
 const pick=r[Math.floor(Math.random()*r.length)],cards=$$("#list .card");
-const done=()=>{cards.forEach(c=>c.classList.remove("roll"));const el=$(`[data-card="${pick.id}"]`);el.classList.add("picked");el.scrollIntoView({behavior:RM?"auto":"smooth",block:"center"});
-setTimeout(()=>{el.classList.remove("picked");rolling=false;openDlg(pick);if(!RM)burst(innerWidth/2,innerHeight/3,60)},RM?0:700)};
+const done=()=>{cards.forEach(c=>c.classList.remove("roll"));const el=$(`[data-card="${akey(actOf(pick))}"]`);el.classList.add("picked");el.scrollIntoView({behavior:RM?"auto":"smooth",block:"center"});
+setTimeout(()=>{el.classList.remove("picked");rolling=false;openDlg(actOf(pick));if(!RM)burst(innerWidth/2,innerHeight/3,60)},RM?0:700)};
 if(RM||cards.length<2)return done();rolling=true;let n=0,steps=10+Math.floor(Math.random()*4);
 (function tick(){cards.forEach(c=>c.classList.remove("roll"));cards[n%cards.length].classList.add("roll");n++;
 if(n<steps)setTimeout(tick,70+n*12);else done()})()}

@@ -147,3 +147,12 @@ dialog[open]{animation:dlgin .4s cubic-bezier(.3,1.5,.5,1)}dialog::backdrop{back
 .card:hover .art.pic{background-size:110%}
 .badge.n{background:var(--c2,#1F2A44);color:#fff}
 @media (prefers-reduced-motion: reduce){.hero-bg .slide{transition:none;transform:none}}
+
+/* Activity cards: picture + title only; click opens coach list */
+.acard .aopen{all:unset;display:flex;flex-direction:column;cursor:pointer;width:100%}
+.acard .aopen:focus-visible{outline:4px solid var(--o);outline-offset:-4px;border-radius:var(--r)}
+.acard .atitle{display:block;padding:16px 18px 18px;font-size:1.3rem;font-weight:800;color:var(--ink)}
+.coaches{list-style:none;padding:0;margin:8px 0 14px;display:flex;flex-direction:column;gap:12px}
+.coach{background:#FBF9F1;border-radius:18px;padding:14px 16px}.coach .chead{position:relative;height:26px}.coach .badge{top:0;left:0}
+.coach h4{margin:4px 0 0;font-size:1.15rem}.coach>p{margin:0 0 8px}
+#dlg{max-height:90vh;overflow:auto}
