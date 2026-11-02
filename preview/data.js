@@ -65,13 +65,13 @@ window.LW_LISTINGS = [
 // Activity-level description shown under each front-card title (keyed by activity).
 window.LW_ACTIVITY_DESC = {
   "Soccer": "Fun, engaging soccer sessions for young children with a female coach who loves helping little ones learn through play.",
-  "Swimming": "Swimming coach listing. Contact Lindy directly to confirm ages taught, lesson format, location and availability.",
+  "Swimming": "Little splashes, big achievements! LittleWins connects families with swimming coaches who help little ones build water confidence and develop swimming skills through playful, supportive lessons.",
   "Ballet": "Tiptoes, twirls and graceful leaps. Little dancers build balance, posture and confidence through music and play.",
   "Sensory Play": "Squish, pour, build and explore! Hands-on play with colours and textures that sparks curiosity and little discoveries.",
   "Karate & Taekwondo": "Kicks, blocks and big \"Hi-yah!\"s. Kids build focus, respect and coordination while having loads of fun.",
   "Zumba": "Dance party time! Upbeat music and easy moves to get little ones jumping, wiggling and smiling.",
-  "Gymnastics": "A sample listing showing how playful movement activities for young children could look.",
-  "Arts & Crafts": "A sample listing for painting, clay and craft sessions.",
-  "Science": "A sample listing for hands-on science experiments and building challenges.",
-  "Music": "A sample listing for songs, drums and dance for babies and toddlers."
+  "Gymnastics": "Little moves, big achievements! LittleWins connects families with gymnastics coaches who help little ones explore balancing, stretching, jumping and rolling through playful activities.",
+  "Arts & Crafts": "Little hands, big imaginations! LittleWins connects families with arts and crafts providers who help little ones explore colours, textures and creativity through playful projects.",
+  "Science": "Little scientists, big discoveries! LittleWins connects families with science activity providers who spark curiosity through playful experiments and hands-on fun.",
+  "Music": "Little voices, big rhythms! LittleWins connects families with music and movement providers who bring learning to life through singing, dancing and playful sounds."
 };

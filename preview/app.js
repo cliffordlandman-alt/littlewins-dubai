@@ -26,7 +26,7 @@ const groups=r=>{const m=new Map();r.forEach(x=>{const k=actOf(x);if(!m.has(k))m
 const akey=k=>k.toLowerCase().replace(/[^a-z0-9]+/g,"-");
 function card([k,xs],i){const x=xs.find(y=>y.img)||xs[0];return `<article class="card acard" data-card="${akey(k)}" style="--i:${i};--c2:${look(x.category)[1]}"><button type="button" class="aopen" data-act="${esc(k)}" aria-label="${esc(k)} Coaches: see coach profiles">${art(x,i,1)}
 <span class="atitle">${esc(k)} Coaches</span><span class="adesc">${esc((window.LW_ACTIVITY_DESC||{})[k]||"")}</span></button></article>`}
-function coach(x){return `<li class="coach${x.sample?" sample":""}" style="--c2:${look(x.category)[1]}"><div class="chead">${badge(x)}</div><h4>${esc(x.name)}</h4><p class="sub">${esc(x.title)}</p><p>${esc(x.summary)}</p><p class="muted">${esc(x.details)}</p>${chips(x)}
+function coach(x){return `<li class="coach${x.sample?" sample":""}" style="--c2:${look(x.category)[1]}"><div class="chead">${badge(x)}</div><h4>${esc(x.name)}</h4><p class="sub">${esc(x.title)}</p><p class="muted">${esc(x.details)}</p>${chips(x)}
 <div class="acts">${x.soon?`<p class="muted">Coming soon — coach and details to be confirmed.</p>`:x.sample?`<p class="muted">Sample listing — not bookable.</p>`:`<a class="btn wa" href="${wa(x.whatsapp,msg(x))}" target="_blank" rel="noopener">💬 WhatsApp ${esc(x.name.split(" ")[0])}</a>`}</div></li>`}
 const match=()=>{const q=st.q.toLowerCase();return L.filter(x=>(!q||[x.name,x.title,x.category,x.summary,x.area].join(" ").toLowerCase().includes(q))
 &&(!st.age||!x.ages.length||x.ages.includes(st.age))&&(!st.cat||x.category===st.cat)&&(!st.area||x.area===st.area||ANY_AREA.includes(x.area))&&(!st.s||x.setting===st.s||x.setting==="To be confirmed"))};
