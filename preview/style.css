@@ -156,3 +156,4 @@ dialog[open]{animation:dlgin .4s cubic-bezier(.3,1.5,.5,1)}dialog::backdrop{back
 .coach{background:#FBF9F1;border-radius:18px;padding:14px 16px}.coach .chead{position:relative;height:26px}.coach .badge{top:0;left:0}
 .coach h4{margin:4px 0 0;font-size:1.15rem}.coach>p{margin:0 0 8px}
 #dlg{max-height:90vh;overflow:auto}
+.acard .atitle{padding-bottom:6px}.acard .adesc{display:block;padding:0 18px 18px;color:var(--ink)}

@@ -61,3 +61,17 @@ window.LW_LISTINGS = [
     summary:"A sample listing for songs, drums and dance for babies and toddlers.",
     details:"Example only — not a real or bookable provider." }
 ];
+
+// Activity-level description shown under each front-card title (keyed by activity).
+window.LW_ACTIVITY_DESC = {
+  "Soccer": "Fun, engaging soccer sessions for young children with a female coach who loves helping little ones learn through play.",
+  "Swimming": "Swimming coach listing. Contact Lindy directly to confirm ages taught, lesson format, location and availability.",
+  "Ballet": "Tiptoes, twirls and graceful leaps. Little dancers build balance, posture and confidence through music and play.",
+  "Sensory Play": "Squish, pour, build and explore! Hands-on play with colours and textures that sparks curiosity and little discoveries.",
+  "Karate & Taekwondo": "Kicks, blocks and big \"Hi-yah!\"s. Kids build focus, respect and coordination while having loads of fun.",
+  "Zumba": "Dance party time! Upbeat music and easy moves to get little ones jumping, wiggling and smiling.",
+  "Gymnastics": "A sample listing showing how playful movement activities for young children could look.",
+  "Arts & Crafts": "A sample listing for painting, clay and craft sessions.",
+  "Science": "A sample listing for hands-on science experiments and building challenges.",
+  "Music": "A sample listing for songs, drums and dance for babies and toddlers."
+};

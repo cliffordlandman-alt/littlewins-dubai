@@ -13,7 +13,7 @@ $("#qcats").innerHTML=cats.map(c=>`<button type="button" data-v="${esc(c)}"><b>$
 const wa=(n,t)=>`https://wa.me/${n}?text=${encodeURIComponent(t)}`;
 const msg=x=>`Hi ${x.name}, I found you on LittleWins Dubai and I'd love to know more about ${x.title.toLowerCase()}.`;
 // Illustrated SVG backdrop (shapes only, no photos)
-const art=(x,i)=>{const s=(i*37)%100;if(x.img)return `<div class="art pic" style="--c:${look(x.category)[0]};background-image:url(${x.img})"><span class="em" aria-hidden="true">${x.emoji}</span></div>`;return `<div class="art" style="--c:${look(x.category)[0]}"><svg viewBox="0 0 300 130" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+const art=(x,i,noEm)=>{const s=(i*37)%100;if(x.img)return `<div class="art pic" style="--c:${look(x.category)[0]};background-image:url(${x.img})">${noEm?"":`<span class="em" aria-hidden="true">${x.emoji}</span>`}</div>`;return `<div class="art" style="--c:${look(x.category)[0]}"><svg viewBox="0 0 300 130" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
 <circle cx="${30+s}" cy="20" r="40" fill="#fff" opacity=".18"/><circle cx="${260-s/2}" cy="110" r="55" fill="#fff" opacity=".15"/>
 <rect x="${180-s}" y="15" width="26" height="26" rx="6" fill="#fff" opacity=".22" transform="rotate(20 ${190-s} 28)"/>
 <path d="M0 105 Q75 80 150 105 T300 100 V130 H0Z" fill="#fff" opacity=".25"/>
@@ -24,8 +24,8 @@ const chips=x=>`<div class="chips"><span>${x.ages.length?"Ages "+x.ages.join(", 
 const actOf=x=>x.activity||x.title;
 const groups=r=>{const m=new Map();r.forEach(x=>{const k=actOf(x);if(!m.has(k))m.set(k,[]);m.get(k).push(x)});return [...m.entries()]};
 const akey=k=>k.toLowerCase().replace(/[^a-z0-9]+/g,"-");
-function card([k,xs],i){const x=xs.find(y=>y.img)||xs[0];return `<article class="card acard" data-card="${akey(k)}" style="--i:${i};--c2:${look(x.category)[1]}"><button type="button" class="aopen" data-act="${esc(k)}" aria-label="${esc(k)} Coaches: see coach profiles">${art(x,i)}
-<span class="atitle">${esc(k)} Coaches</span></button></article>`}
+function card([k,xs],i){const x=xs.find(y=>y.img)||xs[0];return `<article class="card acard" data-card="${akey(k)}" style="--i:${i};--c2:${look(x.category)[1]}"><button type="button" class="aopen" data-act="${esc(k)}" aria-label="${esc(k)} Coaches: see coach profiles">${art(x,i,1)}
+<span class="atitle">${esc(k)} Coaches</span><span class="adesc">${esc((window.LW_ACTIVITY_DESC||{})[k]||"")}</span></button></article>`}
 function coach(x){return `<li class="coach${x.sample?" sample":""}" style="--c2:${look(x.category)[1]}"><div class="chead">${badge(x)}</div><h4>${esc(x.name)}</h4><p class="sub">${esc(x.title)}</p><p>${esc(x.summary)}</p><p class="muted">${esc(x.details)}</p>${chips(x)}
 <div class="acts">${x.soon?`<p class="muted">Coming soon — coach and details to be confirmed.</p>`:x.sample?`<p class="muted">Sample listing — not bookable.</p>`:`<a class="btn wa" href="${wa(x.whatsapp,msg(x))}" target="_blank" rel="noopener">💬 WhatsApp ${esc(x.name.split(" ")[0])}</a>`}</div></li>`}
 const match=()=>{const q=st.q.toLowerCase();return L.filter(x=>(!q||[x.name,x.title,x.category,x.summary,x.area].join(" ").toLowerCase().includes(q))
