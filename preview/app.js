@@ -4,7 +4,7 @@ const st={q:"",age:"",cat:"",area:"",s:""};
 const esc=t=>String(t).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const uniq=k=>[...new Set(L.map(x=>x[k]))].sort();
 // Category look: colour, darker text colour, icon. Unknown categories get a fallback.
-const CAT={Sports:["#2BB673","#167a4b","⚽"],Swimming:["#3DA5FF","#1665b0","🏊"],Movement:["#FF5D8F","#b3214f","🤸"],Arts:["#FF7A45","#b4471a","🎨"],Music:["#8B5CF6","#5b2fc2","🎵"],STEM:["#14B8A6","#0b766b","🔬"],Dance:["#E04FB0","#a3237a","🩰"],"Martial arts":["#E5484D","#a11d22","🥋"],Sensory:["#F5A524","#8a5a00","🫧"]};
+const CAT={Sports:["#2BB673","#167a4b","⚽"],Swimming:["#3DA5FF","#1665b0","🏊"],Movement:["#FF5D8F","#b3214f","🤸"],Arts:["#FF7A45","#b4471a","🎨"],Music:["#8B5CF6","#5b2fc2","🎵"],STEM:["#14B8A6","#0b766b","🔬"],Dance:["#E04FB0","#a3237a","🩰"],"Martial arts":["#E5484D","#a11d22","🥋"],Tutoring:["#4F7CFF","#2346b8","📚"],Sensory:["#F5A524","#8a5a00","🫧"]};
 const look=c=>CAT[c]||["#FFB020","#8a5a00","⭐"];
 const ANY_AREA=["Across Dubai","To be confirmed"];uniq("area").filter(c=>!ANY_AREA.includes(c)).forEach(c=>$("#area").add(new Option(c,c)));
 const cats=uniq("category");
@@ -23,9 +23,10 @@ const badge=x=>`<span class="badge${x.sample?" s":""}${x.soon?" n":""}">${x.samp
 const chips=x=>`<div class="chips"><span>${x.ages.length?"Ages "+x.ages.join(", "):"Ages to confirm"}</span>${x.soon?"<span>Coach & location to confirm</span>":`<span>${esc(x.setting)}</span><span>${esc(x.area)}</span>`}</div>`;
 const actOf=x=>x.activity||x.title;
 const groups=r=>{const m=new Map();r.forEach(x=>{const k=actOf(x);if(!m.has(k))m.set(k,[]);m.get(k).push(x)});return [...m.entries()]};
+const ttl=(k,x)=>x.cardTitle||`${k} Coaches`;
 const akey=k=>k.toLowerCase().replace(/[^a-z0-9]+/g,"-");
-function card([k,xs],i){const x=xs.find(y=>y.img)||xs[0];return `<article class="card acard" data-card="${akey(k)}" style="--i:${i};--c2:${look(x.category)[1]}"><button type="button" class="aopen" data-act="${esc(k)}" aria-label="${esc(k)} Coaches: see coach profiles">${art(x,i,1)}
-<span class="atitle">${esc(k)} Coaches</span><span class="adesc">${esc((window.LW_ACTIVITY_DESC||{})[k]||"")}</span></button></article>`}
+function card([k,xs],i){const x=xs.find(y=>y.img)||xs[0];return `<article class="card acard" data-card="${akey(k)}" style="--i:${i};--c2:${look(x.category)[1]}"><button type="button" class="aopen" data-act="${esc(k)}" aria-label="${esc(ttl(k,x))}: see coach profiles">${art(x,i,1)}
+<span class="atitle">${esc(ttl(k,x))}</span>${(window.LW_ACTIVITY_DESC||{})[k]?`<span class="adesc">${esc(window.LW_ACTIVITY_DESC[k])}</span>`:""}</button></article>`}
 function coach(x){return `<li class="coach${x.sample?" sample":""}" style="--c2:${look(x.category)[1]}"><div class="chead">${badge(x)}</div><h4>${esc(x.name)}</h4><p class="sub">${esc(x.title)}</p><p class="muted">${esc(x.details)}</p>${chips(x)}
 <div class="acts">${x.soon?`<p class="muted">Coming soon — coach and details to be confirmed.</p>`:x.sample?`<p class="muted">Sample listing — not bookable.</p>`:`<a class="btn wa" href="${wa(x.whatsapp,msg(x))}" target="_blank" rel="noopener">💬 WhatsApp ${esc(x.name.split(" ")[0])}</a>`}</div></li>`}
 const match=()=>{const q=st.q.toLowerCase();return L.filter(x=>(!q||[x.name,x.title,x.category,x.summary,x.area].join(" ").toLowerCase().includes(q))
@@ -44,7 +45,7 @@ $("#reset").onclick=reset;
 // Details dialog
 const dlg=$("#dlg");
 function openDlg(k){const xs=match().filter(y=>actOf(y)===k),all=xs.length?xs:L.filter(y=>actOf(y)===k),x=all.find(y=>y.img)||all[0];
-$("#dlg-body").innerHTML=`<div style="position:relative">${art(x,1)}</div><div class="cbody" style="--c2:${look(x.category)[1]}"><h3 id="dlg-t">${esc(k)} Coaches</h3><p class="sub">${all.length} ${all.length===1?"profile":"profiles"}</p><ul class="coaches">${all.map(coach).join("")}</ul>
+$("#dlg-body").innerHTML=`<div style="position:relative">${art(x,1)}</div><div class="cbody" style="--c2:${look(x.category)[1]}"><h3 id="dlg-t">${esc(ttl(k,x))}</h3><p class="sub">${all.length} ${all.length===1?"profile":"profiles"}</p><ul class="coaches">${all.map(coach).join("")}</ul>
 <button type="button" class="btn ghost back">← Back to activities</button></div>`;dlg.showModal();dlg.querySelector(".back").onclick=()=>dlg.close()}
 $("#list").addEventListener("click",e=>{if(e.target.closest(".clear-f"))return reset();const b=e.target.closest("[data-act]");if(b)openDlg(b.dataset.act)});
 dlg.querySelector(".close").onclick=()=>dlg.close();dlg.addEventListener("click",e=>{if(e.target===dlg)dlg.close()});
