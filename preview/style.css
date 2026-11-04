@@ -157,3 +157,7 @@ dialog[open]{animation:dlgin .4s cubic-bezier(.3,1.5,.5,1)}dialog::backdrop{back
 .coach h4{margin:4px 0 0;font-size:1.15rem}.coach>p{margin:0 0 8px}
 #dlg{max-height:90vh;overflow:auto}
 .acard .atitle{padding-bottom:6px}.acard .adesc{display:block;padding:0 18px 18px;color:var(--ink)}
+.coach .avatar{width:88px;height:88px;border-radius:50%;object-fit:cover;display:block;margin:4px 0 6px;border:3px solid #fff;box-shadow:var(--sh)}
+#certs{max-width:900px;width:calc(100% - 20px);max-height:94vh;overflow:auto;padding:52px 14px 14px;text-align:center}
+#certs figure{margin:0}#certs img{max-width:100%;max-height:70vh;object-fit:contain;border-radius:10px;background:#f4f1e6}
+#certs figcaption{font-weight:700;margin:10px 4px}.cnav{display:flex;justify-content:center;align-items:center;gap:14px;margin:6px 0 10px}.cback{margin-top:4px}

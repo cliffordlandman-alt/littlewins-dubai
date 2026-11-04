@@ -27,7 +27,7 @@ const ttl=(k,x)=>x.cardTitle||`${k} Coaches`;
 const akey=k=>k.toLowerCase().replace(/[^a-z0-9]+/g,"-");
 function card([k,xs],i){const x=xs.find(y=>y.img)||xs[0];return `<article class="card acard" data-card="${akey(k)}" style="--i:${i};--c2:${look(x.category)[1]}"><button type="button" class="aopen" data-act="${esc(k)}" aria-label="${esc(ttl(k,x))}: see coach profiles">${art(x,i,1)}
 <span class="atitle">${esc(ttl(k,x))}</span>${(window.LW_ACTIVITY_DESC||{})[k]?`<span class="adesc">${esc(window.LW_ACTIVITY_DESC[k])}</span>`:""}</button></article>`}
-function coach(x){return `<li class="coach${x.sample?" sample":""}" style="--c2:${look(x.category)[1]}"><div class="chead">${badge(x)}</div><h4>${esc(x.name)}</h4><p class="sub">${esc(x.title)}</p><p class="muted">${esc(x.details)}</p>${chips(x)}
+function coach(x){return `<li class="coach${x.sample?" sample":""}" style="--c2:${look(x.category)[1]}"><div class="chead">${badge(x)}</div>${x.photo?`<img class="avatar" src="${x.photo}" alt="Photo of ${esc(x.name)}" width="88" height="88">`:""}<h4>${esc(x.name)}</h4><p class="sub">${esc(x.title)}</p><p class="muted">${esc(x.details)}</p>${chips(x)}${x.certs&&x.certs.length?`<p><button type="button" class="btn ghost certs-btn" data-certs="${x.id}">📜 View certificates (${x.certs.length})</button></p>`:""}
 <div class="acts">${x.soon?`<p class="muted">Coming soon — coach and details to be confirmed.</p>`:x.sample?`<p class="muted">Sample listing — not bookable.</p>`:`<a class="btn wa" href="${wa(x.whatsapp,msg(x))}" target="_blank" rel="noopener">💬 WhatsApp ${esc(x.name.split(" ")[0])}</a>`}</div></li>`}
 const match=()=>{const q=st.q.toLowerCase();return L.filter(x=>(!q||[x.name,x.title,x.category,x.summary,x.area].join(" ").toLowerCase().includes(q))
 &&(!st.age||!x.ages.length||x.ages.includes(st.age))&&(!st.cat||x.category===st.cat)&&(!st.area||x.area===st.area||ANY_AREA.includes(x.area))&&(!st.s||x.setting===st.s||x.setting==="To be confirmed"))};
@@ -48,6 +48,15 @@ function openDlg(k){const xs=match().filter(y=>actOf(y)===k),all=xs.length?xs:L.
 $("#dlg-body").innerHTML=`<div style="position:relative">${art(x,1,1)}</div><div class="cbody" style="--c2:${look(x.category)[1]}"><h3 id="dlg-t">${esc(ttl(k,x))}</h3><p class="sub">${all.length} ${all.length===1?"profile":"profiles"}</p><ul class="coaches">${all.map(coach).join("")}</ul>
 <button type="button" class="btn ghost back">← Back to activities</button></div>`;dlg.showModal();dlg.querySelector(".back").onclick=()=>dlg.close()}
 $("#list").addEventListener("click",e=>{if(e.target.closest(".clear-f"))return reset();const b=e.target.closest("[data-act]");if(b)openDlg(b.dataset.act)});
+// Certificates viewer
+const cv2=document.createElement("dialog");cv2.id="certs";cv2.setAttribute("aria-label","Certificates");cv2.innerHTML=`<button type="button" class="close" aria-label="Close certificates">✕</button><figure><img alt=""><figcaption></figcaption></figure><div class="cnav"><button type="button" class="btn ghost prev" aria-label="Previous certificate">←</button><span class="cpos"></span><button type="button" class="btn ghost next" aria-label="Next certificate">→</button></div><button type="button" class="btn ghost cback">← Back to profile</button>`;document.body.appendChild(cv2);
+let cl=[],ci=0;const cshow=()=>{const c=cl[ci],im=cv2.querySelector("img");im.src=c.src;im.alt=c.cap;cv2.querySelector("figcaption").textContent=c.cap;cv2.querySelector(".cpos").textContent=`${ci+1} / ${cl.length}`};
+const cmove=n=>{ci=(ci+n+cl.length)%cl.length;cshow()};
+cv2.querySelector(".prev").onclick=()=>cmove(-1);cv2.querySelector(".next").onclick=()=>cmove(1);
+cv2.querySelector(".close").onclick=cv2.querySelector(".cback").onclick=()=>cv2.close();cv2.addEventListener("click",e=>{if(e.target===cv2)cv2.close()});
+cv2.addEventListener("keydown",e=>{if(e.key==="ArrowLeft")cmove(-1);if(e.key==="ArrowRight")cmove(1)});
+let tx=0;cv2.addEventListener("touchstart",e=>tx=e.touches[0].clientX,{passive:true});cv2.addEventListener("touchend",e=>{const d=e.changedTouches[0].clientX-tx;if(Math.abs(d)>50)cmove(d<0?1:-1)});
+dlg.addEventListener("click",e=>{const b=e.target.closest("[data-certs]");if(!b)return;cl=L.find(y=>y.id===b.dataset.certs).certs;ci=0;cshow();cv2.showModal()});
 dlg.querySelector(".close").onclick=()=>dlg.close();dlg.addEventListener("click",e=>{if(e.target===dlg)dlg.close()});
 // Surprise me
 let rolling=false;
