@@ -20,7 +20,7 @@ const art=(x,i,noEm)=>{const s=(i*37)%100;if(x.img)return `<div class="art pic" 
 <circle cx="${90+s/3}" cy="95" r="6" fill="#fff" opacity=".5"/><circle cx="${240-s}" cy="35" r="4" fill="#fff" opacity=".6"/></svg>
 <span class="em" aria-hidden="true">${x.emoji}</span></div>`};
 const badge=x=>`<span class="badge${x.sample?" s":""}${x.soon?" n":""}">${x.sample?"Sample":esc(x.tag)}</span>`;
-const chips=x=>`<div class="chips"><span>${x.ages.length?"Ages "+x.ages.join(", "):"Ages to confirm"}</span>${x.soon?"<span>Coach & location to confirm</span>":`<span>${esc(x.setting)}</span><span>${esc(x.area)}</span>`}</div>`;
+const chips=x=>`<div class="chips"><span>${x.ageLabel?esc(x.ageLabel):x.ages.length?"Ages "+x.ages.join(", "):"Ages to confirm"}</span>${x.soon?"<span>Coach & location to confirm</span>":`<span>${esc(x.setting)}</span><span>${esc(x.area)}</span>`}</div>`;
 const actOf=x=>x.activity||x.title;
 const groups=r=>{const m=new Map();r.forEach(x=>{const k=actOf(x);if(!m.has(k))m.set(k,[]);m.get(k).push(x)});return [...m.entries()]};
 const ttl=(k,x)=>x.cardTitle||`${k} Coaches`;
@@ -45,7 +45,7 @@ $("#reset").onclick=reset;
 // Details dialog
 const dlg=$("#dlg");
 function openDlg(k){const xs=match().filter(y=>actOf(y)===k),all=xs.length?xs:L.filter(y=>actOf(y)===k),x=all.find(y=>y.img)||all[0];
-$("#dlg-body").innerHTML=`<div style="position:relative">${art(x,1)}</div><div class="cbody" style="--c2:${look(x.category)[1]}"><h3 id="dlg-t">${esc(ttl(k,x))}</h3><p class="sub">${all.length} ${all.length===1?"profile":"profiles"}</p><ul class="coaches">${all.map(coach).join("")}</ul>
+$("#dlg-body").innerHTML=`<div style="position:relative">${art(x,1,1)}</div><div class="cbody" style="--c2:${look(x.category)[1]}"><h3 id="dlg-t">${esc(ttl(k,x))}</h3><p class="sub">${all.length} ${all.length===1?"profile":"profiles"}</p><ul class="coaches">${all.map(coach).join("")}</ul>
 <button type="button" class="btn ghost back">← Back to activities</button></div>`;dlg.showModal();dlg.querySelector(".back").onclick=()=>dlg.close()}
 $("#list").addEventListener("click",e=>{if(e.target.closest(".clear-f"))return reset();const b=e.target.closest("[data-act]");if(b)openDlg(b.dataset.act)});
 dlg.querySelector(".close").onclick=()=>dlg.close();dlg.addEventListener("click",e=>{if(e.target===dlg)dlg.close()});
